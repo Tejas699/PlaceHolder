@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>Image place holder</title>
+    <script>
+        function handleChanges(isCopyURL) {
+            let fields = {
+                txt: document.getElementById("txt").value,
+                canvasTXTClr: document.getElementById('canvasTXTClr').value.replace("#", ""),
+                canvasBGClr: document.getElementById('canvasBGClr').value.replace("#", ""),
+                URL: document.getElementById('URL').innerHTML,
+            }
+            let url = `https://via.placeholder.com/200x200/${fields.canvasBGClr}/${fields.canvasTXTClr}?text=${fields.txt}`;
+            document.getElementById("URL").innerHTML = url || "invalid url";
+            document.getElementById("canvas").style.backgroundColor = fields.canvasBGClr;
+            document.getElementById('canvasTXT').style.color = fields.canvasTXTClr;
+            document.getElementById('canvasTXT').innerHTML = fields.txt;
+            if (isCopyURL) navigator.clipboard.writeText(url);
+        }
+    </script>
+    <style>
+        body {
+            border: 1px solid black;
+            background-image: url('https://cdn.pixabay.com/photo/2020/02/06/01/52/frame-4822807_1280.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); gap:20px;">
+        <div style="display:flex;margin:10px; width: 100%; justify-content: center;align-items: center;">
+            <div style="width: 30%;font-size: 20px;font-weight: 600;color: #3c3c3c; text-align: center;">Enter Text:
+            </div>
+            <div style="width: 70%; width: 70%; border: 1px solid #c3c3c3; border-radius: 5px;height: 25px;">
+                <input type:"text" id="txt" onchange="handleChanges()"
+                    style="width: 100%;height: 25px;outline: none; border: none;font-size: 15px;border-radius: 5px;" />
+            </div>
+        </div>
+        <hr />
+        <div style="display: flex;width: 100%;margin:10px; justify-content: center; align-items: center;">
+            <div style="display: flex;width: 50%;gap:15px; justify-content: center; align-items: center;">
+                <div style="font-size: 20px;font-weight: 600;color: #3c3c3c; text-align: center;">Txt Color :
+                </div>
+                <div> <input type="color" id="canvasTXTClr" onChange="handleChanges()"> </div>
+            </div>
+            <div style="display: flex;width: 50%;gap:15px; justify-content: center; align-items: center;">
+                <div style="font-size: 20px;font-weight: 600;color: #3c3c3c; text-align: center;">BG Color:
+                </div>
+                <div> <input type="color" id="canvasBGClr" onChange="handleChanges()"> </div>
+            </div>
+        </div>
+        <hr />
+        <div style="display: flex;width: 100%;margin:10px; justify-content: center; align-items: center;">
+            <div id="URL"
+                style="border: 1px solid #c3c3c3; width: 70%; border-radius: 5px;word-wrap: break-word; padding:0 15px">
+                https://via.placeholder.com/200x200/3c3c3c/c3c3c3?text='Text'
+            </div>
+            <div style="cursor: pointer;width: 30%;display: flex; justify-content: center; align-items: center; "
+                onclick="handleChanges(true)">
+                <div
+                    style="border: 1px solid grey;border-radius: 10px; width: 100px; display: flex;justify-content: center;align-items: center;height: 25px; background-color: #09c5a08c;">
+                    Copy </div>
+            </div>
+        </div>
+        <hr />
+        <div id="canvas"
+            style="height : 200px; width:100%;margin-top:10px;display: flex; justify-content: center; align-items: center; background-color: black; ">
+            <label id="canvasTXT" style="color:white">text</label>
+        </div>
+    </div>
+</body>
+
+</html>
